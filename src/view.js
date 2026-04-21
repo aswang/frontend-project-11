@@ -1,12 +1,12 @@
 import { subscribe } from 'valtio/vanilla';
 
-const renderForm = (state, elements) => {
+const renderForm = (state, elements, i18nextInstance) => {
   const { input, feedback } = elements;
 
   switch (state.form.status) {
     case 'invalid':
       input.classList.add('is-invalid');
-      feedback.textContent = state.form.error;
+      feedback.textContent = i18nextInstance.t(`errors.${state.form.error}`);
       feedback.classList.remove('text-success');
       feedback.classList.add('text-danger');
       break;
@@ -14,7 +14,7 @@ const renderForm = (state, elements) => {
       input.classList.remove('is-invalid');
       input.value = '';
       input.focus();
-      feedback.textContent = 'RSS успешно загружен';
+      feedback.textContent = i18nextInstance.t('success');
       feedback.classList.remove('text-danger');
       feedback.classList.add('text-success');
       break;
@@ -25,7 +25,7 @@ const renderForm = (state, elements) => {
   }
 };
 
-const initView = (state) => {
+const initView = (state, i18nextInstance) => {
   const elements = {
     form: document.querySelector('.rss-form'),
     input: document.querySelector('#url-input'),
@@ -33,7 +33,7 @@ const initView = (state) => {
   };
 
   subscribe(state, () => {
-    renderForm(state, elements);
+    renderForm(state, elements, i18nextInstance);
   });
 
   return elements;

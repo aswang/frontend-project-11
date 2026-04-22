@@ -22,6 +22,7 @@
   "homepage": "https://github.com/aswang/frontend-project-11#readme",
   "dependencies": {
     "@eslint/js": "^9.39.4",
+    "axios": "^1.15.1",
     "bootstrap": "^5.3.8",
     "eslint": "^9.39.4",
     "globals": "^17.5.0",

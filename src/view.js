@@ -109,7 +109,6 @@ const renderPosts = (state, elements) => {
 
     const link = document.createElement('a');
     link.setAttribute('href', post.link);
-    link.classList.add('fw-bold');
     link.dataset.id = post.id;
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');

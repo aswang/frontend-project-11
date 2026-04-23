@@ -1,1 +1,25 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+.bg-dark {
+  background-color: #343a40 !important;
+}
+
+.posts a {
+  color: #3b82f6;
+  font-weight: 400;
+}
+
+.posts a:hover {
+  color: #2563eb;
+}
+
+.posts .btn-outline-primary {
+  color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.posts .btn-outline-primary:hover {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: #fff;
+}

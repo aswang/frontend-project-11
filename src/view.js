@@ -1,4 +1,5 @@
 import { subscribe } from 'valtio/vanilla';
+import { Modal } from 'bootstrap';
 
 const renderForm = (state, elements, i18nextInstance) => {
   const { input, feedback } = elements;
@@ -112,13 +113,13 @@ const renderPosts = (state, elements) => {
     link.dataset.id = post.id;
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
+    const isSeen = state.ui.seenPosts.includes(post.id);
+    link.classList.add(isSeen ? 'fw-normal' : 'fw-bold');
     link.textContent = post.title;
 
     const button = document.createElement('button');
     button.setAttribute('type', 'button');
     button.dataset.id = post.id;
-    button.dataset.bsToggle = 'modal';
-    button.dataset.bsTarget = '#modal';
     button.classList.add('btn', 'btn-outline-primary', 'btn-sm');
     button.textContent = 'Просмотр';
 
@@ -137,7 +138,26 @@ const initView = (state, i18nextInstance) => {
     feedback: document.querySelector('.feedback'),
     feedsContainer: document.querySelector('.feeds'),
     postsContainer: document.querySelector('.posts'),
+    modal: document.querySelector('#modal'),
+    modalTitle: document.querySelector('.modal-title'),
+    modalBody: document.querySelector('.modal-body'),
+    modalLink: document.querySelector('.full-article'),
   };
+
+  elements.postsContainer.addEventListener('click', (e) => {
+    const { id } = e.target.dataset;
+    if (!id) return;
+    if (!state.ui.seenPosts.includes(id)) {
+      state.ui.seenPosts.push(id);
+    }
+    if (e.target.tagName === 'BUTTON') {
+      const post = state.posts.find((p) => p.id === id);
+      elements.modalTitle.textContent = post.title;
+      elements.modalBody.textContent = post.description;
+      elements.modalLink.href = post.link;
+      Modal.getOrCreateInstance(elements.modal).show();
+    }
+  });
 
   subscribe(state, () => {
     renderForm(state, elements, i18nextInstance);

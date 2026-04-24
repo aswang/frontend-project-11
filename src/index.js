@@ -99,6 +99,9 @@ const app = () => {
       },
       feeds: [],
       posts: [],
+      ui: {
+        seenPosts: [],
+      },
     });
 
     const elements = initView(state, i18nextInstance);

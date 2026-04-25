@@ -13,4 +13,4 @@ export default {
     posts: 'Посты',
     preview: 'Просмотр',
   },
-};
+}

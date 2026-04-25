@@ -30,5 +30,8 @@
     "valtio": "^2.3.1",
     "vite": "^8.0.8",
     "yup": "^1.7.1"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "^5.10.0"
   }
 }

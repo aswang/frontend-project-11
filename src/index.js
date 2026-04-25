@@ -24,6 +24,8 @@ const createSchema = (urls) => yup.string()
 
 const UPDATE_INTERVAL = 5000;
 
+const generateId = () => `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
 const buildProxyUrl = (url) => {
   const proxyUrl = new URL('https://allorigins.hexlet.app/get');
   proxyUrl.searchParams.set('disableCache', 'true');
@@ -40,7 +42,7 @@ const checkForUpdates = (state) => {
         .map((post) => post.link);
       const newPosts = posts
         .filter((post) => !existingLinks.includes(post.link))
-        .map((post) => ({ id: crypto.randomUUID(), feedId: feed.id, ...post }));
+        .map((post) => ({ id: generateId(), feedId: feed.id, ...post }));
       if (newPosts.length > 0) {
         state.posts.unshift(...newPosts);
       }
@@ -59,10 +61,10 @@ const loadFeed = (url, state) => {
   return axios.get(buildProxyUrl(url))
     .then((response) => {
       const { feed, posts } = parseRss(response.data.contents);
-      const feedId = crypto.randomUUID();
+      const feedId = generateId();
       state.feeds.push({ id: feedId, url, ...feed });
       const normalizedPosts = posts.map((post) => ({
-        id: crypto.randomUUID(),
+        id: generateId(),
         feedId,
         ...post,
       }));

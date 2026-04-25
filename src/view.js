@@ -114,7 +114,11 @@ const renderPosts = (state, elements, i18nextInstance) => {
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
     const isSeen = state.ui.seenPosts.includes(post.id);
-    link.classList.add(isSeen ? 'fw-normal' : 'fw-bold');
+    if (isSeen) {
+      link.classList.add('fw-normal', 'link-secondary');
+    } else {
+      link.classList.add('fw-bold');
+    }
     link.textContent = post.title;
 
     const button = document.createElement('button');
@@ -160,8 +164,8 @@ const initView = (state, i18nextInstance) => {
   });
 
   subscribe(state, () => {
-    renderForm(state, elements, i18nextInstance);
     renderLoadingProcess(state, elements, i18nextInstance);
+    renderForm(state, elements, i18nextInstance);
     renderFeeds(state, elements, i18nextInstance);
     renderPosts(state, elements, i18nextInstance);
   });

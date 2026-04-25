@@ -76,10 +76,10 @@ const loadFeed = (url, state) => {
       if (err.isParsingError) {
         state.loadingProcess.error = 'noRss'
       }
- else if (err.isAxiosError) {
+      else if (err.isAxiosError) {
         state.loadingProcess.error = 'network'
       }
- else {
+      else {
         state.loadingProcess.error = 'unknown'
       }
     })

@@ -64,12 +64,12 @@ const buildCard = (titleText) => {
   return { card, list };
 };
 
-const renderFeeds = (state, elements) => {
+const renderFeeds = (state, elements, i18nextInstance) => {
   const { feedsContainer } = elements;
   feedsContainer.innerHTML = '';
   if (state.feeds.length === 0) return;
 
-  const { card, list } = buildCard('Фиды');
+  const { card, list } = buildCard(i18nextInstance.t('feeds'));
 
   state.feeds.forEach((feed) => {
     const item = document.createElement('li');
@@ -90,12 +90,12 @@ const renderFeeds = (state, elements) => {
   feedsContainer.append(card);
 };
 
-const renderPosts = (state, elements) => {
+const renderPosts = (state, elements, i18nextInstance) => {
   const { postsContainer } = elements;
   postsContainer.innerHTML = '';
   if (state.posts.length === 0) return;
 
-  const { card, list } = buildCard('Посты');
+  const { card, list } = buildCard(i18nextInstance.t('posts'));
 
   state.posts.forEach((post) => {
     const item = document.createElement('li');
@@ -121,7 +121,7 @@ const renderPosts = (state, elements) => {
     button.setAttribute('type', 'button');
     button.dataset.id = post.id;
     button.classList.add('btn', 'btn-outline-primary', 'btn-sm');
-    button.textContent = 'Просмотр';
+    button.textContent = i18nextInstance.t('preview');
 
     item.append(link, button);
     list.append(item);
@@ -162,8 +162,8 @@ const initView = (state, i18nextInstance) => {
   subscribe(state, () => {
     renderForm(state, elements, i18nextInstance);
     renderLoadingProcess(state, elements, i18nextInstance);
-    renderFeeds(state, elements);
-    renderPosts(state, elements);
+    renderFeeds(state, elements, i18nextInstance);
+    renderPosts(state, elements, i18nextInstance);
   });
 
   return elements;

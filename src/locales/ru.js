@@ -9,5 +9,8 @@ export default {
       unknown: 'Что-то пошло не так',
     },
     success: 'RSS успешно загружен',
+    feeds: 'Фиды',
+    posts: 'Посты',
+    preview: 'Просмотр',
   },
 };
